@@ -1,2 +1,2 @@
 # HabitCore
-Em construção!
+🛠️ Em construção! 
