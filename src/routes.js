@@ -99,4 +99,22 @@ routes.delete("/tasks/:id", (req, res) => {
   res.json({ message: "Tarefa deletada" })
 })
 
+//UPDATE
+
+routes.put("/tasks/:id", (req, res) => {
+    const { id } = req.params
+    const { texto } = req.body
+
+    const tarefa = tarefas.find(t => t.id == id)
+
+    if(!tarefa){
+        return res.status(404).json({erro:"Tarefa não encontrada!"})
+    }
+
+    tarefa.texto = texto
+    res.json(tarefa)
+})
+
+
+
 export default routes

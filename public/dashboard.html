@@ -59,6 +59,7 @@ async function criarTarefa(){
 <li>
   ${tarefa.texto}
   <button onclick="deletarTarefa(${tarefa.id})">❌</button>
+  <button onclick="editarTarefa(${tarefa.id}, '${tarefa.texto}')">✏️</button>
 </li>
 `
  })}
@@ -78,7 +79,26 @@ function logout(){
     window.location.href= "/login.html"
 }
 
+//EDITAR TAREFAS
+async function editarTarefa(id, textoAtual){
 
+ const novoTexto = prompt("Editar tarefa:", textoAtual)
+
+ if(!novoTexto) return
+
+ await fetch(`/tasks/${id}`,{
+  method:"PUT",
+  headers:{
+    "Content-Type":"application/json"
+  },
+  body: JSON.stringify({
+    texto: novoTexto
+  })
+ })
+
+ carregarTarefas()
+
+}
 
 carregarTarefas()//PARA RETORNAR TODAS AS TAREFAS QUANDO LOGAR
 
