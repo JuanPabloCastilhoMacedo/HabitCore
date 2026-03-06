@@ -12,20 +12,23 @@ async function login(){
  const senha = document.getElementById("senha").value
 
  const resposta = await fetch("/login",{
-   method:"POST",
-   headers:{
-     "Content-Type":"application/json"
-   },
-   body:JSON.stringify({nome,senha})
- })
+  method:"POST",
+  headers:{
+    "Content-Type":"application/json"
+  },
+  body:JSON.stringify({nome,senha})
+})
 
- const dados = await resposta.json()
+const dados = await resposta.json()
 
- if(resposta.ok){
- window.location.href = "/dashboard.html"
+if(resposta.ok){
+
+  // salva o usuário logado
+  localStorage.setItem("usuario", JSON.stringify(dados.usuario))
+
+  window.location.href = "/dashboard.html"
 }
 
- alert(dados.message || dados.erro)
-
+alert(dados.message || dados.erro)
 }
 </script>

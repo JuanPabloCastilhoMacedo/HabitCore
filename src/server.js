@@ -6,7 +6,6 @@ const port = 3333
 
 server.use(express.static("public"))
 server.use(express.json())
-
 server.use(routes)
 
 server.listen(port, () => console.log(`Conectado a porta: ${port}`))

@@ -8,9 +8,13 @@ let usuarios = []
 
 routes.post("/register", (req,res)=>{
 
- const {nome, senha} = req.body
+    const {nome, senha} = req.body
 
- const usuarioExistente = usuarios.find(user => user.nome === nome)
+    const nomeLimpo = nome.trim()
+
+    const usuarioExistente = usuarios.find(
+    user => user.nome.toLowerCase() === nomeLimpo.toLowerCase()
+  )
  
  if(usuarioExistente){
   return res.status(400).json({erro:"Usuário já existe"})
@@ -18,13 +22,15 @@ routes.post("/register", (req,res)=>{
 
  const usuario = {
    id: usuarios.length + 1,
-   nome,
+   nome: nomeLimpo,
    senha
  }
 
  usuarios.push(usuario)
 
  res.json(usuario)
+
+ console.log(usuarios)
 
 })
 
@@ -42,31 +48,45 @@ routes.post("/login", (req,res)=>{
    return res.status(401).json({erro:"Login inválido"})
  }
 
- res.json({message:"Login realizado com sucesso"})
+ res.json({
+   message:"Login realizado com sucesso",
+   usuario
+ })
+
 })
 
 
-
-//CRUD DE DASHBOARD
-//GET
+//CRUD DO DASHBOARD
+//POST
 let tarefas = []
-
-routes.get("/tasks",(req,res)=>{
- res.json(tarefas)
-})
 
 routes.post("/tasks",(req,res)=>{
 
- const {texto} = req.body
+ const {texto, usuarioId} = req.body
 
  const tarefa = {
    id: tarefas.length + 1,
-   texto
+   texto,
+   usuarioId
  }
 
  tarefas.push(tarefa)
 
  res.json(tarefa)
+
+})
+
+
+//GET
+routes.get("/tasks",(req,res)=>{
+
+ const {usuarioId} = req.query
+
+ const tarefasUsuario = tarefas.filter(
+   tarefa => tarefa.usuarioId == usuarioId
+ )
+
+ res.json(tarefasUsuario)
 
 })
 

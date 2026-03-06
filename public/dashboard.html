@@ -10,24 +10,37 @@
 
 <script>
 
+const usuario = JSON.parse(localStorage.getItem("usuario"))
+
+if(!usuario){
+  window.location.href = "/login.html"
+}
+
 async function criarTarefa(){
 
  const texto = document.getElementById("tarefa").value
 
- await fetch("/tasks",{
+ const resposta = await fetch("/tasks",{
    method:"POST",
    headers:{
      "Content-Type":"application/json"
    },
-   body:JSON.stringify({texto})
+   body:JSON.stringify({
+     texto,
+     usuarioId: usuario.id
+   })
  })
 
- carregarTarefas()
+ if(resposta.ok){
+   document.getElementById("tarefa").value = "" // limpa o input
+   await carregarTarefas() // espera carregar
+ }
+
 }
 
-async function carregarTarefas(){
+ async function carregarTarefas(){
 
- const resposta = await fetch("/tasks")
+ const resposta = await fetch(`/tasks?usuarioId=${usuario.id}`)
  const tarefas = await resposta.json()
 
  const lista = document.getElementById("lista")
@@ -35,9 +48,9 @@ async function carregarTarefas(){
 
  tarefas.forEach(tarefa => {
    lista.innerHTML += `<li>${tarefa.texto}</li>`
- })
+ })}
 
-}
+
 
 carregarTarefas()
 
