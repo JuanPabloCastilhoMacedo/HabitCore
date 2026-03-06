@@ -46,4 +46,28 @@ routes.post("/login", (req,res)=>{
 })
 
 
+
+//CRUD DE DASHBOARD
+//GET
+let tarefas = []
+
+routes.get("/tasks",(req,res)=>{
+ res.json(tarefas)
+})
+
+routes.post("/tasks",(req,res)=>{
+
+ const {texto} = req.body
+
+ const tarefa = {
+   id: tarefas.length + 1,
+   texto
+ }
+
+ tarefas.push(tarefa)
+
+ res.json(tarefa)
+
+})
+
 export default routes
