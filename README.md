@@ -36,16 +36,24 @@ Durante o desenvolvimento foram praticados conceitos como:
 - LocalStorage
 
 ---
+## Requisitos
 
+- Node.js 18+
+- NPM
+
+---
 ## ⚙️ Como executar o projeto
 
-1️⃣ Clone o repositório
+1️⃣ Clone o repositório: git clone https://github.com/seu-usuario/habitcore.git
 
-2️⃣ Instale as dependências: 
+2️⃣ Entre na pasta do projeto pelo terminal: cd habitcore
 
-3️⃣ Inicie o servidor: npm run dev
+3️⃣ Instale as dependências: npm install 
 
-4️⃣ Acesse no navegador: http://localhost:3333
+4️⃣ Inicie o servidor: npm run dev
+
+5️⃣ Acesse no navegador: http://localhost:3333
+
 
 ## 🎯 Objetivo do projeto
 
