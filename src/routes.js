@@ -10,6 +10,12 @@ routes.post("/register", (req,res)=>{
 
  const {nome, senha} = req.body
 
+ const usuarioExistente = usuarios.find(user => user.nome === nome)
+ 
+ if(usuarioExistente){
+  return res.status(400).json({erro:"Usuário já existe"})
+ }
+
  const usuario = {
    id: usuarios.length + 1,
    nome,
