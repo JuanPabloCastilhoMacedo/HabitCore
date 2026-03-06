@@ -11,14 +11,21 @@ async function registrar() {
  const nome = document.getElementById("nome").value
  const senha = document.getElementById("senha").value
 
- await fetch("/register", {
+ const resposta = await fetch("/register", {
    method: "POST",
    headers: {
      "Content-Type": "application/json"
    },
    body: JSON.stringify({ nome, senha })
- })
+})
 
- alert("Usuário criado")
+const dados = await resposta.json()
+
+if(!resposta.ok){
+    alert(dados.erro)
+    return
+}
+
+alert("Usuário criado")
 }
 </script>
