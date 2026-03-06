@@ -28,4 +28,22 @@ routes.post("/register", (req,res)=>{
 
 })
 
+
+// LOGIN
+routes.post("/login", (req,res)=>{
+
+ const {nome, senha} = req.body
+
+ const usuario = usuarios.find(
+   user => user.nome === nome && user.senha === senha
+ )
+
+ if(!usuario){
+   return res.status(401).json({erro:"Login inválido"})
+ }
+
+ res.json({message:"Login realizado com sucesso"})
+})
+
+
 export default routes
