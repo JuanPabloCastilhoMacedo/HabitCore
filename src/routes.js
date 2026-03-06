@@ -90,4 +90,13 @@ routes.get("/tasks",(req,res)=>{
 
 })
 
+//DELETE
+routes.delete("/tasks/:id", (req, res) => {
+  const { id } = req.params
+
+  tarefas = tarefas.filter(tarefa => tarefa.id != id)
+
+  res.json({ message: "Tarefa deletada" })
+})
+
 export default routes

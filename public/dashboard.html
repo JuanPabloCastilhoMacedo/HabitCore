@@ -19,6 +19,7 @@ if(!usuario){
   window.location.href = "/login.html"
 }
 
+//CRIAR TAREFAS
 async function criarTarefa(){
 
  const texto = document.getElementById("tarefa").value
@@ -34,13 +35,17 @@ async function criarTarefa(){
    })
  })
 
+ document.getElementById("tarefa").value = ""
+
  if(resposta.ok){
    document.getElementById("tarefa").value = "" // limpa o input
    await carregarTarefas() // espera carregar
- }
+}
 
 }
 
+
+//CARREGAR TAREFAS
  async function carregarTarefas(){
 
  const resposta = await fetch(`/tasks?usuarioId=${usuario.id}`)
@@ -58,19 +63,23 @@ async function criarTarefa(){
 `
  })}
 
- 
+//DELETAR TAREFAS
  async function deletarTarefa(id){
      await fetch(`/tasks/${id}`,{
         method:"DELETE"
-     })
-     carregarTarefas()
+    })
+    carregarTarefas()
 }
 
 
-//Logout
+//LOGOUT
 function logout(){
     localStorage.removeItem("usuario")
     window.location.href= "/login.html"
 }
+
+
+
+carregarTarefas()//PARA RETORNAR TODAS AS TAREFAS QUANDO LOGAR
 
 </script>
