@@ -21,6 +21,10 @@ async function login(){
 
  const dados = await resposta.json()
 
+ if(resposta.ok){
+ window.location.href = "/dashboard.html"
+}
+
  alert(dados.message || dados.erro)
 
 }

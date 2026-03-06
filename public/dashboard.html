@@ -1,0 +1,44 @@
+<h1>Dashboard</h1>
+
+<h2>Criar tarefa</h2>
+
+<input id="tarefa" placeholder="Nova tarefa">
+<button onclick="criarTarefa()">Criar</button>
+
+<h2>Minhas tarefas</h2>
+<ul id="lista"></ul>
+
+<script>
+
+async function criarTarefa(){
+
+ const texto = document.getElementById("tarefa").value
+
+ await fetch("/tasks",{
+   method:"POST",
+   headers:{
+     "Content-Type":"application/json"
+   },
+   body:JSON.stringify({texto})
+ })
+
+ carregarTarefas()
+}
+
+async function carregarTarefas(){
+
+ const resposta = await fetch("/tasks")
+ const tarefas = await resposta.json()
+
+ const lista = document.getElementById("lista")
+ lista.innerHTML = ""
+
+ tarefas.forEach(tarefa => {
+   lista.innerHTML += `<li>${tarefa.texto}</li>`
+ })
+
+}
+
+carregarTarefas()
+
+</script>
