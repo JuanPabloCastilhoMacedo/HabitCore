@@ -1,9 +1,12 @@
 <h1>Dashboard</h1>
 
+
 <h2>Criar tarefa</h2>
 
 <input id="tarefa" placeholder="Nova tarefa">
 <button onclick="criarTarefa()">Criar</button>
+<button onclick="logout()">Logout</button> 
+
 
 <h2>Minhas tarefas</h2>
 <ul id="lista"></ul>
@@ -47,11 +50,27 @@ async function criarTarefa(){
  lista.innerHTML = ""
 
  tarefas.forEach(tarefa => {
-   lista.innerHTML += `<li>${tarefa.texto}</li>`
+   lista.innerHTML += `
+<li>
+  ${tarefa.texto}
+  <button onclick="deletarTarefa(${tarefa.id})">❌</button>
+</li>
+`
  })}
 
+ 
+ async function deletarTarefa(id){
+     await fetch(`/tasks/${id}`,{
+        method:"DELETE"
+     })
+     carregarTarefas()
+}
 
 
-carregarTarefas()
+//Logout
+function logout(){
+    localStorage.removeItem("usuario")
+    window.location.href= "/login.html"
+}
 
 </script>

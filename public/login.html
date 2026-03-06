@@ -4,6 +4,7 @@
 <input id="senha" type="password" placeholder="Senha">
 
 <button onclick="login()">Entrar</button>
+<button onclick="home()">Voltar Para a Página inicial</button>
 
 <script>
 async function login(){
@@ -30,5 +31,10 @@ if(resposta.ok){
 }
 
 alert(dados.message || dados.erro)
+}
+
+//Função para voltar para a página inicial
+function home(){
+    window.location.href = "/"
 }
 </script>

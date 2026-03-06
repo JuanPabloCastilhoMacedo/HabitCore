@@ -4,8 +4,10 @@
 <input id="senha" placeholder="Senha" type="password">
 
 <button onclick="registrar()">Registrar</button>
+<button onclick="home()">Voltar Para a Página inicial</button>
 
 <script>
+    //Função Registrar
 async function registrar() {
 
  const nome = document.getElementById("nome").value
@@ -27,5 +29,10 @@ if(!resposta.ok){
 }
 
 alert("Usuário criado")
+}
+
+//Função para voltar para a página inicial
+function home(){
+    window.location.href = "/"
 }
 </script>
